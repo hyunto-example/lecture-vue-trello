@@ -47,7 +47,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 * 인증
   - 로그인
   - 로그아웃
+  
 * 보드
+
 | # | 생성 | 조회 | 수정 | 이동 | 삭제 |
 | - | - | - | - | - | - | - |
 | 보드 | o | o | o (타이틀, 색상) | x | o |
