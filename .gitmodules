@@ -1,0 +1,3 @@
+[submodule "lecture-vue-trello-server"]
+	path = lecture-vue-trello-server
+	url = https://github.com/jeonghwan-kim/lecture-vue-trello-server.git
