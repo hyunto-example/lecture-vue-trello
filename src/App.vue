@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <HelloWorld msg="여기서부터 코드를 시작합니다."/>
+    <NavBar></NavBar>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NavBar from './components/NavBar.vue'
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  components: { NavBar },
+  data() {
+    return {
+
+    }
   }
 }
 </script>
