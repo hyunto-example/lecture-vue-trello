@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld msg="여기서부터 코드를 시작합니다."/>
   </div>
 </template>
 
