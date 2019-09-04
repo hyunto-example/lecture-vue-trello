@@ -3,13 +3,11 @@
     Home
     <div>
       Board List:
-
       <div v-if="loading">Loading...</div>
       <div v-else>
-        API Result: <pre>{{apiRes}}</pre>
-      </div>
-      <div v-if="error">
-        <pre>{{error}}</pre>
+        <div v-for="board in boards" :key="board.id">
+          {{board}}
+        </div>
       </div>
 
       <ul>
@@ -31,7 +29,7 @@ export default {
   data() {
     return {
       loading: false,
-      apiRes: '',
+      boards: [],
       error: ''
     }
   },
@@ -60,12 +58,12 @@ export default {
       /* 
        * Axios
        */
-      axios.get('http://localhost:3000/_health')
+      axios.get('http://localhost:3000/boards')
         .then(res => {
-          this.apiRes = res.data
+          this.boards = res.data
         })
         .catch(err => {
-          this.error = err.response.data
+          this.$router.replace('/login')
         })
         .finally(() => {
           this.loading = false
