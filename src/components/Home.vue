@@ -14,19 +14,24 @@
         </a>
       </div>
     </div>
+    <AddBoard v-if="isAddBoard" @close="isAddBoard=false" @submit="onAddBoard" />
   </div>
 </template>
 
 <script>
-// import axios from 'axios'
 import {board} from '../api'
+import AddBoard from './AddBoard'
 
 export default {
+  components: {
+    AddBoard
+  },
   data() {
     return {
       loading: false,
       boards: [],
-      error: ''
+      error: '',
+      isAddBoard: false,
     }
   },
   created() {
@@ -40,49 +45,20 @@ export default {
   methods: {
     fetchData() {
       this.loading = true;
-
-      /*
-       * XMLHttpRequest
-       */
-      // const req = new XMLHttpRequest()
-      // req.open('GET', 'http://localhost:3000/health')
-      // req.send()
-      // req.addEventListener('load', () => {
-      //   this.loading = false
-      //   this.apiRes = {
-      //     status: req.status,
-      //     statusText: req.statusText,
-      //     response: JSON.parse(req.response)
-      //   }
-      // })
-
-      /* 
-       * Axios
-       */
-      // axios.get('http://localhost:3000/boards')
-      //   .then(res => {
-      //     this.boards = res.data
-      //   })
-      //   .catch(err => {
-      //     this.$router.replace('/login')
-      //   })
-      //   .finally(() => {
-      //     this.loading = false
-      //   })
-
-        /* 
-         * Axios Wrapper
-         */
-        board.fetch()
-          .then(data => {
-            this.boards = data.list
-          })
-          .finally(() => {
-            this.loading = false
-          })
+      board.fetch()
+        .then(data => {
+          this.boards = data.list
+        })
+        .finally(() => {
+          this.loading = false
+        })
     },
     addBoard() {
-      console.log('addBoard()')
+      this.isAddBoard = true
+    },
+    onAddBoard(title) {
+      board.create(title)
+        .then(() => this.fetchData())
     }
   }
 }
