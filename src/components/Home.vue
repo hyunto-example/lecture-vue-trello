@@ -9,7 +9,7 @@
         </router-link>
       </div>
       <div class="board-item board-item-new">
-        <a class="new-board-btn" href="" @click.prevent="addBoard">
+        <a class="new-board-btn" href="" @click.prevent="SET_IS_ADD_BOARD(true)">
           Create new board...
         </a>
       </div>
@@ -21,7 +21,7 @@
 <script>
 import {board} from '../api'
 import AddBoard from './AddBoard'
-import {mapState} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 
 export default {
   components: {
@@ -34,14 +34,6 @@ export default {
       error: '',
     }
   },
-  /*
-   * Vuex Helper 함수 mapState 적용 전
-   */
-  // computed: {
-  //   isAddBoard() {
-  //     return this.$store.state.isAddBoard
-  //   }
-  // },
   computed: {
     ...mapState([
       'isAddBoard'
@@ -56,6 +48,9 @@ export default {
     })
   },
   methods: {
+    ...mapMutations([
+      'SET_IS_ADD_BOARD'
+    ]),
     fetchData() {
       this.loading = true;
       board.fetch()
@@ -65,10 +60,6 @@ export default {
         .finally(() => {
           this.loading = false
         })
-    },
-    addBoard() {
-      // this.isAddBoard = true
-      
     },
     onAddBoard(title) {
       board.create(title)
