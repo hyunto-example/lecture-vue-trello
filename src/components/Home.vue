@@ -21,6 +21,7 @@
 <script>
 import {board} from '../api'
 import AddBoard from './AddBoard'
+import {mapState} from 'vuex'
 
 export default {
   components: {
@@ -31,8 +32,20 @@ export default {
       loading: false,
       boards: [],
       error: '',
-      isAddBoard: false,
     }
+  },
+  /*
+   * Vuex Helper 함수 mapState 적용 전
+   */
+  // computed: {
+  //   isAddBoard() {
+  //     return this.$store.state.isAddBoard
+  //   }
+  // },
+  computed: {
+    ...mapState([
+      'isAddBoard'
+    ]),
   },
   created() {
     this.fetchData()
@@ -54,7 +67,8 @@ export default {
         })
     },
     addBoard() {
-      this.isAddBoard = true
+      // this.isAddBoard = true
+      
     },
     onAddBoard(title) {
       board.create(title)
